@@ -1,4 +1,4 @@
-from torch import exp, arange, empty, cfloat
+from torch import pi,exp, arange, empty, cfloat
 import torchaudio
 import matplotlib.pyplot as plt
 import celluloid
@@ -8,7 +8,7 @@ def fft(x,N, s):
     X = empty(B, N, dtype=cfloat).view(B, 2, -1)
     X[:, 0] = fft (x, N // 2, 2 * s)
     X[:, 1] = fft(x [:, s:], N // 2, 2 * s)
-    q = exp(-((2j * 3.1415) / N) * arange(N // 2))*X[:, 1]
+    q = exp(-((2j * pi) / N) * arange(N // 2))*X[:, 1]
     X[:, 0], X[:, 1] = X[:, 0] + q, X[:, 0] - q
     return X.view(B, N)
 # Sound Processing
