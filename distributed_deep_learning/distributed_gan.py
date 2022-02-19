@@ -8,7 +8,9 @@ from matplotlib import pyplot
 
 import tensorflow as tf
 
-mirrored_strategy = tf.distribute.MirroredStrategy(["GPU:0", "GPU:1"])
+#mirrored_strategy = tf.distribute.MirroredStrategy(["GPU:0", "GPU:1"])
+mirrored_strategy = tf.distribute.MirroredStrategy(
+    cross_device_ops=tf.distribute.HierarchicalCopyAllReduce())
 # define the standalone discriminator model
 def define_discriminator(in_shape=(32,32,3)):
 	model = Sequential([
